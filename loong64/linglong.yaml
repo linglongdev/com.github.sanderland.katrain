@@ -78,7 +78,7 @@ build: |
   APPLIB="$PREFIX/lib/katrain"
   KATAGO_SRC=/project/linglong/sources/KataGo.git
   KATRAIN_SRC=/project/linglong/sources/katrain.git
-  PATCHDIR=/project/patches/KataGo
+  PATCHDIR=/project/loong64/patches/KataGo
 
   # --------------------------------------------------------------- KataGo ----
   # Patches have to land before compiling. 0001 keeps -mfpmath=sse off non-x86
