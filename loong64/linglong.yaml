@@ -109,6 +109,10 @@ build: |
   # kivy and ffpyplayer have no loongarch64 wheels, so pip would build them from
   # source on every run; wheels/ in the project dir caches the result (kivy alone
   # costs ~15 min). Falls back to building them if the cache is absent.
+  # Build hosts reach files.pythonhosted.org at ~10 kB/s, which times out on
+  # Kivy's 23 MB sdist; the TUNA mirror serves the same paths at >1 MB/s and
+  # honours Range requests, so pip's resume logic works there too.
+  export PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
   WHEELHOUSE=/project/wheels
   PKGS="kivy>=2.3.1 ffpyplayer>=4.5.1 screeninfo>=0.8.1,<0.9 chardet>=5.2.0,<6 docutils>=0.21.2 urllib3>=2.2.2 websocket-client>=1.9.0 certifi pysgf>=1.0.0,<2"
   if [ -d "$WHEELHOUSE" ] && ls "$WHEELHOUSE"/Kivy-*.whl "$WHEELHOUSE"/ffpyplayer-*.whl >/dev/null 2>&1; then

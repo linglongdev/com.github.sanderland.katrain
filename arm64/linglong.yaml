@@ -75,6 +75,13 @@ build: |
   # wheel cache or source builds needed.
   cd $KATRAIN_SRC
 
+  # Build hosts reach files.pythonhosted.org at ~10 kB/s, which times out on
+  # larger packages; the TUNA mirror serves the same content at >1 MB/s.
+  # pip reads PIP_INDEX_URL, uv reads UV_DEFAULT_INDEX (UV_INDEX_URL on old uv).
+  export PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
+  export UV_DEFAULT_INDEX="https://pypi.tuna.tsinghua.edu.cn/simple"
+  export UV_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
+
   python3 -m venv $KATRAIN_SRC/.venv
   source $KATRAIN_SRC/.venv/bin/activate
   pip install uv
